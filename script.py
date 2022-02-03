@@ -47,7 +47,7 @@ class MyApp(QWidget):
         self.setWindowTitle('NAS Spotlight Photo Generator')
         self.setStyleSheet(qdarktheme.load_stylesheet())
         self.setWindowIcon(QIcon('images/icon.ico'))
-        self.setFixedSize(QSize(460,500))
+        self.setFixedSize(QSize(520,500))
         self.threadpool = QThreadPool() # Start threads
         
         username_box = QLineEdit()
