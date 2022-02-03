@@ -22,12 +22,6 @@ myappid = u'nasspotlight.photogenerator' # arbitrary string
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 try:
-    # Create target Directory
-    os.mkdir('output')
-except FileExistsError:
-    print("Directory already exists")
-
-try:
     last_file = open('last.txt','r')
     username=last_file.readline()
     username = username.strip('\n')
@@ -69,6 +63,9 @@ class MyApp(QWidget):
 
         self.button = QPushButton('&Submit')
         self.button.clicked.connect(self.submit)
+        self.button2 = QPushButton('&Open output folder')
+        self.button2.clicked.connect(self.open_output)
+        
         datetime_label = QLabel('Date and time of the last uploaded track')
         user_label = QLabel('Last.fm username')
         title_label = QLabel('<font size=5>NAS Spotlight Photo Generator</font>')
@@ -89,13 +86,17 @@ class MyApp(QWidget):
         vbox_datetime = QVBoxLayout()
         vbox_datetime.addWidget(datetime_label)
         vbox_datetime.addWidget(dateEdit)
+
+        hbox_buttons = QHBoxLayout()
+        hbox_buttons.addWidget(self.button)
+        hbox_buttons.addWidget(self.button2)
         
         vbox = QVBoxLayout()
         vbox.addWidget(lbl)
         vbox.addWidget(title_label)
         vbox.addLayout(vbox_user)
         vbox.addLayout(vbox_datetime)
-        vbox.addWidget(self.button)
+        vbox.addLayout(hbox_buttons)
         vbox.addWidget(self.statusLabel)
         vbox.addWidget(self.remainingLabel)
         self.setLayout(vbox)
@@ -124,6 +125,7 @@ class MyApp(QWidget):
             user_info=pylast.AuthenticatedUser.get_recent_tracks(user, limit= None, cacheable=True, time_from=int(pd.Timestamp(last).timestamp()))
         except:
             self.statusLabel.setText('<font color="#FF4700">Check your input data</font>')
+            self.remainingLabel.setText('')
         # Create dataframe
         song=[]
         artist=[]
@@ -170,6 +172,11 @@ class MyApp(QWidget):
                 sum = df['Difference'].iloc[i-1] + sum
                 df['Sum'].iloc[i-1]=sum
                 if sum >= 60:
+                    try:
+                        # Create target Directory
+                        os.mkdir('output')
+                    except FileExistsError:
+                        print("Directory already exists")
                     photos = photos + 1
                     photoCreated = True
                     sum=0
@@ -216,15 +223,22 @@ class MyApp(QWidget):
             final_file.write(username + '\n')
             final_file.write(str(new_last))
             final_file.close()
-            self.statusLabel.setText('<font color="#20FF00">' + str(photos) +' photos were created successfully</font>')
+            self.statusLabel.setText('<font color="#20FF00">' + str(photos) +' photos were created successfully')
         else:
             self.statusLabel.setText('<font color="#FF4700">You don\'t have enough listening time</font>')
-        self.remainingLabel.setText("You have acumulated " + str(remaining) + " minutes of listening time")
+        self.remainingLabel.setText("You have " + str(remaining) + " minutes accumulated of listening time")
     
     def submit(self):
         self.statusLabel.setText('<font color="#00CEFF">Working...</font>')
         worker = Worker(self.execute_this_fn)
         self.threadpool.start(worker)
+    
+    def open_output(self):
+        try:
+            os.mkdir('output')
+        except FileExistsError:
+            print("Directory already exists")
+        os.startfile(r'output')
 
 
 class Worker(QRunnable):
