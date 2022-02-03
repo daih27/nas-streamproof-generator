@@ -46,7 +46,7 @@ class MyApp(QWidget):
 
         self.setWindowTitle('NAS Spotlight Photo Generator')
         self.setStyleSheet(qdarktheme.load_stylesheet())
-        self.setWindowIcon(QIcon('images/icon.ico'))
+        self.setWindowIcon(QIcon('logos/icon.ico'))
         self.setFixedSize(QSize(520,500))
         self.threadpool = QThreadPool() # Start threads
         
@@ -73,7 +73,7 @@ class MyApp(QWidget):
         self.remainingLabel = QLabel('')
 
         # Banner
-        pixmap = QPixmap('images/banner.jpg')
+        pixmap = QPixmap('logos/banner.jpg')
         pixmap = pixmap.scaledToWidth(440)
         lbl = QLabel(self)
         lbl.setPixmap(pixmap)
