@@ -69,7 +69,7 @@ class MyApp(QWidget):
 
         self.button = QPushButton('&Submit')
         self.button.clicked.connect(self.submit)
-        datetime_label = QLabel('Date and time of last uploaded track')
+        datetime_label = QLabel('Date and time of the last uploaded track')
         user_label = QLabel('Last.fm username')
         title_label = QLabel('<font size=5>NAS Spotlight Photo Generator</font>')
         self.statusLabel = QLabel('')
@@ -161,14 +161,16 @@ class MyApp(QWidget):
                     
 
         remaining='0'
+        photos = 0
         ind=len(df)
         df['Time'] = df['Time'].dt.strftime('%d-%m-%Y %H:%M')
 
         for i in range(len(df), 0, -1):
-            if i != len(df):
+            if i != len(df) and i != 0:
                 sum = df['Difference'].iloc[i-1] + sum
                 df['Sum'].iloc[i-1]=sum
                 if sum >= 60:
+                    photos = photos + 1
                     photoCreated = True
                     sum=0
                     df['Sum'].iloc[i-1]=sum
@@ -205,14 +207,16 @@ class MyApp(QWidget):
 
                     ind=i-1
                     del df_1, ax, fig, tb
-        remaining=df['Sum'].iloc[0]
+        try:
+            remaining = df['Sum'].iloc[0]
+        except:
+            remaining = 0
         if photoCreated:
-            print(df)
             final_file = open('last.txt','w')
             final_file.write(username + '\n')
             final_file.write(str(new_last))
             final_file.close()
-            self.statusLabel.setText('<font color="#20FF00">Photos were created successfully</font>')
+            self.statusLabel.setText('<font color="#20FF00">' + str(photos) +' photos were created successfully</font>')
         else:
             self.statusLabel.setText('<font color="#FF4700">You don\'t have enough listening time</font>')
         self.remainingLabel.setText("You have acumulated " + str(remaining) + " minutes of listening time")
