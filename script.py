@@ -112,7 +112,7 @@ class MyApp(QWidget):
 
     def execute_this_fn(self):
         photoCreated=False
-        pythoncom.CoInitialize() # arreglar un error
+        pythoncom.CoInitialize() # Fix thread error
         network = pylast.LastFMNetwork(
         api_key=API_KEY,
         api_secret=API_SECRET,
