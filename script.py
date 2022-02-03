@@ -69,7 +69,7 @@ class MyApp(QWidget):
 
         self.button = QPushButton('&Submit')
         self.button.clicked.connect(self.submit)
-        datetime_label = QLabel('Date and time')
+        datetime_label = QLabel('Date and time of last uploaded track')
         user_label = QLabel('Last.fm username')
         title_label = QLabel('<font size=5>NAS Spotlight Photo Generator</font>')
         self.statusLabel = QLabel('')
@@ -165,13 +165,13 @@ class MyApp(QWidget):
         df['Time'] = df['Time'].dt.strftime('%d-%m-%Y %H:%M')
 
         for i in range(len(df), 0, -1):
-            if i != 0 and i != len(df):
+            if i != len(df):
                 sum = df['Difference'].iloc[i-1] + sum
                 df['Sum'].iloc[i-1]=sum
-                remaining=df['Difference'].iloc[i]
                 if sum >= 60:
                     photoCreated = True
                     sum=0
+                    df['Sum'].iloc[i-1]=sum
                     new_last=df['Time'].iloc[i-1]
                     df_1 = df.iloc[i-1:ind,:]
                     df_1.drop("Sum",1, inplace=True)
@@ -205,7 +205,9 @@ class MyApp(QWidget):
 
                     ind=i-1
                     del df_1, ax, fig, tb
+        remaining=df['Sum'].iloc[0]
         if photoCreated:
+            print(df)
             final_file = open('last.txt','w')
             final_file.write(username + '\n')
             final_file.write(str(new_last))
