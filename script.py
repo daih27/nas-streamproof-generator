@@ -66,7 +66,7 @@ class MyApp(QWidget):
         self.button2 = QPushButton('&Open output folder')
         self.button2.clicked.connect(self.open_output)
         
-        datetime_label = QLabel('Date and time of the last uploaded track')
+        datetime_label = QLabel('Date and time of the last uploaded track (UTC)')
         user_label = QLabel('Last.fm username')
         title_label = QLabel('<font size=5>NAS Spotlight Photo Generator</font>')
         self.statusLabel = QLabel('')
@@ -74,7 +74,7 @@ class MyApp(QWidget):
 
         # Banner
         pixmap = QPixmap('images/banner.jpg')
-        pixmap = pixmap.scaledToWidth(400)
+        pixmap = pixmap.scaledToWidth(440)
         lbl = QLabel(self)
         lbl.setPixmap(pixmap)
         lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
