@@ -1,9 +1,10 @@
-# nas-photogenerator
-A photo generator for New Artist Spotlight using the scrobbles from Last.fm.
+# nas-imagegenerator
+An image generator for New Artist Spotlight using the scrobbles from Last.fm.
 
 ## Usage
 
-The user must input a Last.fm username and the date and time of the last scrobbled track at your last uploaded photo, in the UTC timezone. The script will automatically generate the photos for every 1 hour of listening time, and then it'll remember the date and time for you the next time you run the script.
+The user must input a Last.fm username and the date and time of the last scrobbled track at your last uploaded image (Using UTC timezone). The script will automatically generate an image for every 1 hour of listening time. Next time it will remember the date and time for you.
+
 
 ## Setup
 To run this project, grab the Windows executable file in the release page, or use the python script directly.
