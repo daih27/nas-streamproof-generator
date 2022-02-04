@@ -1,9 +1,9 @@
-# nas-imagegenerator
-An image generator for New Artist Spotlight using the scrobbles from Last.fm.
+# nas-streamproof-generator
+A stream proof generator for New Artist Spotlight using the scrobbles from Last.fm.
 
 ## Usage
 
-The user must input a Last.fm username and the date and time of the last scrobbled track at your last uploaded image (Using UTC timezone). The script will automatically generate an image for every 1 hour of listening time. Next time it will remember the date and time for you.
+The user must input a Last.fm username and the date and time of the last scrobbled track at your last uploaded stream proof image (Using UTC timezone). The script will automatically generate a stream proof image for every 1 hour of listening time. Next time it will remember the date and time for you.
 
 
 ## Setup
