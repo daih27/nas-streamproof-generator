@@ -223,7 +223,7 @@ class MyApp(QWidget):
             final_file.write(username + '\n')
             final_file.write(str(new_last))
             final_file.close()
-            self.statusLabel.setText('<font color="#20FF00">' + str(photos) +' photos were created successfully')
+            self.statusLabel.setText('<font color="#20FF00">' + str(photos) +' images were created successfully</font>')
         else:
             self.statusLabel.setText('<font color="#FF4700">You don\'t have enough listening time</font>')
         self.remainingLabel.setText("You have " + str(remaining) + " minutes accumulated of listening time")
