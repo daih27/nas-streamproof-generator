@@ -18,7 +18,7 @@ import ctypes
 API_KEY = "2334165ad38e100611e01e54ba6df293"
 API_SECRET = "86fc1d8d37aefe64cfb77d4e3466c488"
 
-myappid = u'nas.photogenerator' # arbitrary string
+myappid = u'nas.streamproofgenerator' # arbitrary string
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 try:
@@ -44,7 +44,7 @@ class MyApp(QWidget):
         super().__init__()
         QApplication.setStyle("Fusion")
 
-        self.setWindowTitle('NAS Photo Generator')
+        self.setWindowTitle('NAS Stream Proof Generator')
         self.setStyleSheet(qdarktheme.load_stylesheet())
         self.setWindowIcon(QIcon('logos/icon.ico'))
         self.setFixedSize(QSize(520,500))
@@ -68,7 +68,7 @@ class MyApp(QWidget):
         
         datetime_label = QLabel('Date and time of the last uploaded track (UTC)')
         user_label = QLabel('Last.fm username')
-        title_label = QLabel('<font size=5>NAS Photo Generator</font>')
+        title_label = QLabel('<font size=5>NAS Stream Proof Generator</font>')
         self.statusLabel = QLabel('')
         self.remainingLabel = QLabel('')
 
