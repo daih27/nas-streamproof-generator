@@ -9,7 +9,8 @@ The user must input a Last.fm username and the date and time of the last scrobbl
 ## Setup
 To run this project, grab the Windows executable file in the release page, or use the python script directly.
 
-To create a virtual environment in the folder you are at:
+### Windows
+Create a virtual environment in the folder you are at:
 
 ```
 python -m venv venv
@@ -30,4 +31,28 @@ Finally, run the python script:
 
 ```
 python -m script.py
+```
+### MacOS
+Create a virtual environment in the folder you are at:
+
+```
+python -m venv venv
+```
+
+Activate it:
+
+```
+source venv/bin/activate
+```
+
+Install the required modules using the requirements.txt file:
+
+```
+pip install -r requirements_MacOS.txt
+```
+
+Finally, run the python script:
+
+```
+python -m script_MacOS.py
 ```
